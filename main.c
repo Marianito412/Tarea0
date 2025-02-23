@@ -1,7 +1,7 @@
 // Include gtk
 #include <stdlib.h>
-#include <gtk-4.0/gtk/gtk.h>
-#include <gtk-4.0/gdk/gdk.h>
+#include <gtk/gtk.h>
+#include <gdk/gdk.h>
 
 int* generateArray(unsigned int k)
 {
