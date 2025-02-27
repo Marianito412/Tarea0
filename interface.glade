@@ -173,7 +173,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
-                <signal name="clicked" handler="Generate_button _clicked" swapped="no"/>
+                <signal name="clicked" handler="onShuffleAndDraw" swapped="no"/>
               </object>
               <packing>
                 <property name="left-attach">0</property>
