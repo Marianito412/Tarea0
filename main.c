@@ -106,8 +106,6 @@ void drawRay(cairo_t *cr, double x0, double y0, double angle, double length, Gdk
 // Función de dibujo principal
 static gboolean drawRays(GtkWidget *widget, cairo_t *cr) {
 
-    if (!Changed) return;
-
     int width = gtk_widget_get_allocated_width(widget);
     int height = gtk_widget_get_allocated_height(widget);
 
@@ -126,8 +124,10 @@ static gboolean drawRays(GtkWidget *widget, cairo_t *cr) {
     cairo_stroke(cr);   
 
     // Vector D
-    int* D = generateArray(k); // Inicializar vector
-    shuffleArray(D, k); // Barajar vector
+    if (Changed){
+        int* D = generateArray(k); // Inicializar vector
+        shuffleArray(D, k); // Barajar vector
+    }
 
     // Dibujar rayos
     for (unsigned int i = 0; i < N; i++) {  // Iterar sobre N, no sobre k
