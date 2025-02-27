@@ -72,20 +72,20 @@ double calculateLength(int Di, int maxVal, double maxLength) {
 // Función para interpolar entre cuatro colores según un ratio
 void lerpColor(GdkRGBA A, GdkRGBA B, GdkRGBA C, GdkRGBA D, float alpha, GdkRGBA* output) {
     if (alpha < 0.33) {
-        output.red = A.red + (B.red - A.red) * (alpha / 0.33);
-        output.green = A.green + (B.green - A.green) * (alpha / 0.33);
-        output.blue = A.blue + (B.blue - A.blue) * (alpha / 0.33);
-        output.alpha = A.alpha + (B.alpha - A.alpha) * (alpha / 0.33);
+        output->red = A.red + (B.red - A.red) * (alpha / 0.33);
+        output->green = A.green + (B.green - A.green) * (alpha / 0.33);
+        output->blue = A.blue + (B.blue - A.blue) * (alpha / 0.33);
+        output->alpha = A.alpha + (B.alpha - A.alpha) * (alpha / 0.33);
     } else if (alpha < 0.66) {
-        output.red = B.red + (C.red - B.red) * ((alpha - 0.33) / 0.33);
-        output.green = B.green + (C.green - B.green) * ((alpha - 0.33) / 0.33);
-        output.blue = B.blue + (C.blue - B.blue) * ((alpha - 0.33) / 0.33);
-        output.alpha = B.alpha + (C.alpha - B.alpha) * ((alpha - 0.33) / 0.33);
+        output->red = B.red + (C.red - B.red) * ((alpha - 0.33) / 0.33);
+        output->green = B.green + (C.green - B.green) * ((alpha - 0.33) / 0.33);
+        output->blue = B.blue + (C.blue - B.blue) * ((alpha - 0.33) / 0.33);
+        output->alpha = B.alpha + (C.alpha - B.alpha) * ((alpha - 0.33) / 0.33);
     } else {
-        output.red = C.red + (D.red - C.red) * ((alpha - 0.66) / 0.34);
-        output.green = C.green + (D.green - C.green) * ((alpha - 0.66) / 0.34);
-        output.blue = C.blue + (D.blue - C.blue) * ((alpha - 0.66) / 0.34);
-        output.alpha = C.alpha + (D.alpha - C.alpha) * ((alpha - 0.66) / 0.34);
+        output->red = C.red + (D.red - C.red) * ((alpha - 0.66) / 0.34);
+        output->green = C.green + (D.green - C.green) * ((alpha - 0.66) / 0.34);
+        output->blue = C.blue + (D.blue - C.blue) * ((alpha - 0.66) / 0.34);
+        output->alpha = C.alpha + (D.alpha - C.alpha) * ((alpha - 0.66) / 0.34);
     }
 }
 
