@@ -133,7 +133,7 @@ static gboolean drawRays(GtkWidget *widget, cairo_t *cr) {
 
         // Interpolar colores usando lerpColor
         GdkRGBA finalColor; 
-        lerpColor(colorC0, colorC1, colorC2, colorC3, ratio, finalColor);
+        lerpColor(colorC0, colorC1, colorC2, colorC3, ratio, &finalColor);
 
         drawRay(cr, centerX, centerY, angle, length, finalColor);
     }
