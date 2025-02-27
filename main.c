@@ -70,25 +70,23 @@ double calculateLength(int Di, int maxVal, double maxLength) {
 }
 
 // Función para interpolar entre cuatro colores según un ratio
-GdkRGBA lerpColor(GdkRGBA A, GdkRGBA B, GdkRGBA C, GdkRGBA D, float alpha) {
-    GdkRGBA newColor;
+void lerpColor(GdkRGBA A, GdkRGBA B, GdkRGBA C, GdkRGBA D, float alpha, GdkRGBA* output) {
     if (alpha < 0.33) {
-        newColor.red = A.red + (B.red - A.red) * (alpha / 0.33);
-        newColor.green = A.green + (B.green - A.green) * (alpha / 0.33);
-        newColor.blue = A.blue + (B.blue - A.blue) * (alpha / 0.33);
-        newColor.alpha = A.alpha + (B.alpha - A.alpha) * (alpha / 0.33);
+        output.red = A.red + (B.red - A.red) * (alpha / 0.33);
+        output.green = A.green + (B.green - A.green) * (alpha / 0.33);
+        output.blue = A.blue + (B.blue - A.blue) * (alpha / 0.33);
+        output.alpha = A.alpha + (B.alpha - A.alpha) * (alpha / 0.33);
     } else if (alpha < 0.66) {
-        newColor.red = B.red + (C.red - B.red) * ((alpha - 0.33) / 0.33);
-        newColor.green = B.green + (C.green - B.green) * ((alpha - 0.33) / 0.33);
-        newColor.blue = B.blue + (C.blue - B.blue) * ((alpha - 0.33) / 0.33);
-        newColor.alpha = B.alpha + (C.alpha - B.alpha) * ((alpha - 0.33) / 0.33);
+        output.red = B.red + (C.red - B.red) * ((alpha - 0.33) / 0.33);
+        output.green = B.green + (C.green - B.green) * ((alpha - 0.33) / 0.33);
+        output.blue = B.blue + (C.blue - B.blue) * ((alpha - 0.33) / 0.33);
+        output.alpha = B.alpha + (C.alpha - B.alpha) * ((alpha - 0.33) / 0.33);
     } else {
-        newColor.red = C.red + (D.red - C.red) * ((alpha - 0.66) / 0.34);
-        newColor.green = C.green + (D.green - C.green) * ((alpha - 0.66) / 0.34);
-        newColor.blue = C.blue + (D.blue - C.blue) * ((alpha - 0.66) / 0.34);
-        newColor.alpha = C.alpha + (D.alpha - C.alpha) * ((alpha - 0.66) / 0.34);
+        output.red = C.red + (D.red - C.red) * ((alpha - 0.66) / 0.34);
+        output.green = C.green + (D.green - C.green) * ((alpha - 0.66) / 0.34);
+        output.blue = C.blue + (D.blue - C.blue) * ((alpha - 0.66) / 0.34);
+        output.alpha = C.alpha + (D.alpha - C.alpha) * ((alpha - 0.66) / 0.34);
     }
-    return newColor;
 }
 
 // Función para dibujar un rayo
@@ -134,7 +132,8 @@ static gboolean drawRays(GtkWidget *widget, cairo_t *cr) {
         float ratio = (float)index / (float)(k - 1); // ratio va de 0 a 1
 
         // Interpolar colores usando lerpColor
-        GdkRGBA finalColor = lerpColor(colorC0, colorC1, colorC2, colorC3, ratio);
+        GdkRGBA finalColor; 
+        lerpColor(colorC0, colorC1, colorC2, colorC3, ratio, finalColor);
 
         drawRay(cr, centerX, centerY, angle, length, finalColor);
     }
@@ -147,6 +146,11 @@ static gboolean drawRays(GtkWidget *widget, cairo_t *cr) {
 static void onShuffleAndDraw(GtkButton* GenerateButton, gpointer userData) {
     GtkWidget *drawingArea = GTK_WIDGET(g_object_get_data(G_OBJECT(GenerateButton), "drawing-area"));
     gtk_widget_queue_draw(drawingArea);    
+}
+
+void destroy(GtkWidget* widget, gpointer data)
+{
+    gtk_main_quit();
 }
 
 // Función para actualizar N y k cuando el usuario cambia los valores
@@ -271,6 +275,10 @@ int main(int argc, char *argv[]) {
     
     g_object_set_data(G_OBJECT(button), "drawing-area", drawingArea);
     g_signal_connect(button, "clicked", G_CALLBACK(onShuffleAndDraw), NULL);
+
+    //Boton de cerrar
+    GtkWidget *closeButton = GTK_WIDGET(gtk_builder_get_object(builder, "Exit_button"));
+    g_signal_connect(closeButton, "clicked", G_CALLBACK(destroy), NULL);
 
     gtk_widget_show_all(window);
     gtk_main();
