@@ -2,7 +2,13 @@
 //                                                     LIBRARIES
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
 #include <gtk/gtk.h>
+#include <cairo.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#include <stdbool.h>  // Para usar el tipo de dato 'bool'
+#include "utility.c"
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
 //                                                     VARIABLES
@@ -92,6 +98,8 @@ void Generate_button_clicked(GtkWidget *widget){
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
 int main(int argc, char *argv[]) {
     gtk_init(&argc, &argv);  
+
+    srand(time(NULL));  // Inicializar la semilla del generador de números aleatorios
 
     GtkBuilder *builder = gtk_builder_new_from_file ("interface.glade");
 
