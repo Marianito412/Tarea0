@@ -126,6 +126,7 @@ static gboolean drawRays(GtkWidget *widget, cairo_t *cr) {
 
     // Vector D
     if (Changed){
+        free(D);
         D = generateArray(k); // Inicializar vector
         shuffleArray(D, k); // Barajar vector
     }
@@ -144,7 +145,7 @@ static gboolean drawRays(GtkWidget *widget, cairo_t *cr) {
         drawRay(cr, centerX, centerY, angle, length, finalColor);
     }
 
-    free(D); // Liberar memoria del array generado
+    //free(D); // Liberar memoria del array generado
     Changed = false;
     return FALSE;
 }
@@ -159,6 +160,7 @@ static void onShuffleAndDraw(GtkButton* GenerateButton, gpointer userData) {
 void destroy(GtkWidget* widget, gpointer data)
 {
     gtk_main_quit();
+    free(D);
 }
 
 // Función para actualizar N y k cuando el usuario cambia los valores
