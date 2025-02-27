@@ -194,8 +194,8 @@ int main(int argc, char *argv[]) {
     g_signal_connect(G_OBJECT(drawingArea), "draw", G_CALLBACK(drawRays), NULL);
 
     // Campos de entrada para N y k
-    GtkWidget *spinButtonN = GTK_WIDGET(gtk_builder_get_object(builder, "N_Entry"))
-    GtkWidget *spinButtonK = GTK_WIDGET(gtk_builder_get_object(builder, "K_Entry"))
+    GtkWidget *spinButtonN = GTK_WIDGET(gtk_builder_get_object(builder, "N_Entry"));
+    GtkWidget *spinButtonK = GTK_WIDGET(gtk_builder_get_object(builder, "K_Entry"));
 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinButtonN), N);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinButtonK), k);
@@ -214,10 +214,10 @@ int main(int argc, char *argv[]) {
     g_object_set_data(G_OBJECT(spinButtonK), "drawing-area", drawingArea);
 
     // Botones de color
-    GtkWidget *colorButtonC0 = GTK_COLOR_BUTTON(gtk_builder_get_object(builder, "color1_button"))
-    GtkWidget *colorButtonC1 = GTK_COLOR_BUTTON(gtk_builder_get_object(builder, "color2_button"))
-    GtkWidget *colorButtonC2 = GTK_COLOR_BUTTON(gtk_builder_get_object(builder, "color3_button"))
-    GtkWidget *colorButtonC3 = GTK_COLOR_BUTTON(gtk_builder_get_object(builder, "color4_button"))
+    GtkColorButton *colorButtonC0 = GTK_COLOR_BUTTON(gtk_builder_get_object(builder, "color1_button"));
+    GtkColorButton *colorButtonC1 = GTK_COLOR_BUTTON(gtk_builder_get_object(builder, "color2_button"));
+    GtkColorButton *colorButtonC2 = GTK_COLOR_BUTTON(gtk_builder_get_object(builder, "color3_button"));
+    GtkColorButton *colorButtonC3 = GTK_COLOR_BUTTON(gtk_builder_get_object(builder, "color4_button"));
 
     //gtk_box_pack_start(GTK_BOX(box), colorButtonC0, FALSE, FALSE, 0);
     //gtk_box_pack_start(GTK_BOX(box), colorButtonC1, FALSE, FALSE, 0);
@@ -237,7 +237,7 @@ int main(int argc, char *argv[]) {
     g_signal_connect(colorButtonC3, "color-set", G_CALLBACK(gtk_color_chooser_get_rgba), &colorC3);
 
     // Botón de redibujar
-    GtkWidget *button = GTK_WIDGET(gtk_builder_get_object(builder, "Generate_button"));;
+    GtkWidget *button = GTK_WIDGET(gtk_builder_get_object(builder, "Generate_button"));
     gtk_box_pack_start(GTK_BOX(box), button, FALSE, FALSE, 0);
     g_signal_connect(button, "clicked", G_CALLBACK(onShuffleAndDraw), drawingArea);
 
