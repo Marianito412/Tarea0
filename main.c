@@ -176,10 +176,12 @@ int main(int argc, char *argv[]) {
         return 1;  // Salir del programa si los valores no son válidos
     }
 
+     GtkBuilder *builder = gtk_builder_new_from_file ("interface.glade");
+
     // Ventana principal
-    GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title(GTK_WINDOW(window), "Rayos con 4 Colores");
-    gtk_window_set_default_size(GTK_WINDOW(window), 800, 800);
+    GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "Window"));
+    //gtk_window_set_title(GTK_WINDOW(window), "Rayos con 4 Colores");
+    //gtk_window_set_default_size(GTK_WINDOW(window), 800, 800);
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
     // Contenedor vertical
@@ -187,40 +189,40 @@ int main(int argc, char *argv[]) {
     gtk_container_add(GTK_CONTAINER(window), box);
 
     // Área de dibujo
-    GtkWidget *drawingArea = gtk_drawing_area_new();
+    GtkWidget *drawingArea = GTK_WIDGET(gtk_builder_get_object(builder, "drawing_area"));
     gtk_box_pack_start(GTK_BOX(box), drawingArea, TRUE, TRUE, 0);
     g_signal_connect(G_OBJECT(drawingArea), "draw", G_CALLBACK(drawRays), NULL);
 
     // Campos de entrada para N y k
-    GtkWidget *spinButtonN = gtk_spin_button_new_with_range(4, 100000000, 1);  // Permitir hasta 100000000 rayos
-    GtkWidget *spinButtonK = gtk_spin_button_new_with_range(4, 100000000, 1);  // Permitir hasta 100000000 datos
+    GtkWidget *spinButtonN = GTK_WIDGET(gtk_builder_get_object(builder, "N_Entry"))
+    GtkWidget *spinButtonK = GTK_WIDGET(gtk_builder_get_object(builder, "K_Entry"))
 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinButtonN), N);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinButtonK), k);
 
-    gtk_box_pack_start(GTK_BOX(box), gtk_label_new("N (Número de rayos):"), FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(box), spinButtonN, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(box), gtk_label_new("k (Número de datos):"), FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(box), spinButtonK, FALSE, FALSE, 0);
+    //gtk_box_pack_start(GTK_BOX(box), gtk_label_new("N (Número de rayos):"), FALSE, FALSE, 0);
+    //gtk_box_pack_start(GTK_BOX(box), spinButtonN, FALSE, FALSE, 0);
+    //gtk_box_pack_start(GTK_BOX(box), gtk_label_new("k (Número de datos):"), FALSE, FALSE, 0);
+    //gtk_box_pack_start(GTK_BOX(box), spinButtonK, FALSE, FALSE, 0);
 
     // Conectar los campos de entrada a la lógica del programa
-    g_signal_connect(spinButtonN, "value-changed", G_CALLBACK(onSpinButtonChanged), &N);
-    g_signal_connect(spinButtonK, "value-changed", G_CALLBACK(onSpinButtonChanged), &k);
+    //g_signal_connect(spinButtonN, "value-changed", G_CALLBACK(onSpinButtonChanged), &N);
+    //g_signal_connect(spinButtonK, "value-changed", G_CALLBACK(onSpinButtonChanged), &k);
 
     // Asociar el área de dibujo a los campos de entrada
     g_object_set_data(G_OBJECT(spinButtonN), "drawing-area", drawingArea);
     g_object_set_data(G_OBJECT(spinButtonK), "drawing-area", drawingArea);
 
     // Botones de color
-    GtkWidget *colorButtonC0 = gtk_color_button_new();
-    GtkWidget *colorButtonC1 = gtk_color_button_new();
-    GtkWidget *colorButtonC2 = gtk_color_button_new();
-    GtkWidget *colorButtonC3 = gtk_color_button_new();
+    GtkWidget *colorButtonC0 = GTK_COLOR_BUTTON(gtk_builder_get_object(builder, "color1_button"))
+    GtkWidget *colorButtonC1 = GTK_COLOR_BUTTON(gtk_builder_get_object(builder, "color2_button"))
+    GtkWidget *colorButtonC2 = GTK_COLOR_BUTTON(gtk_builder_get_object(builder, "color3_button"))
+    GtkWidget *colorButtonC3 = GTK_COLOR_BUTTON(gtk_builder_get_object(builder, "color4_button"))
 
-    gtk_box_pack_start(GTK_BOX(box), colorButtonC0, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(box), colorButtonC1, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(box), colorButtonC2, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(box), colorButtonC3, FALSE, FALSE, 0);
+    //gtk_box_pack_start(GTK_BOX(box), colorButtonC0, FALSE, FALSE, 0);
+    //gtk_box_pack_start(GTK_BOX(box), colorButtonC1, FALSE, FALSE, 0);
+    //gtk_box_pack_start(GTK_BOX(box), colorButtonC2, FALSE, FALSE, 0);
+    //gtk_box_pack_start(GTK_BOX(box), colorButtonC3, FALSE, FALSE, 0);
 
     // Configurar colores iniciales en los botones de color
     gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(colorButtonC0), &colorC0);
@@ -235,7 +237,7 @@ int main(int argc, char *argv[]) {
     g_signal_connect(colorButtonC3, "color-set", G_CALLBACK(gtk_color_chooser_get_rgba), &colorC3);
 
     // Botón de redibujar
-    GtkWidget *button = gtk_button_new_with_label("Dibujar");
+    GtkWidget *button = GTK_WIDGET(gtk_builder_get_object(builder, "Generate_button"));;
     gtk_box_pack_start(GTK_BOX(box), button, FALSE, FALSE, 0);
     g_signal_connect(button, "clicked", G_CALLBACK(onShuffleAndDraw), drawingArea);
 
