@@ -10,10 +10,10 @@ unsigned int N = 4; // Número de rayos
 unsigned int k = 4; // Número de datos
 
 // Variables globales para los colores
-GdkRGBA colorC0 = {1.0, 0.0, 0.0, 1.0}; // Rojo
-GdkRGBA colorC1 = {0.0, 0.0, 1.0, 1.0}; // Azul
-GdkRGBA colorC2 = {0.0, 1.0, 0.0, 1.0}; // Verde
-GdkRGBA colorC3 = {1.0, 1.0, 0.0, 1.0}; // Amarillo
+GdkRGBA colorC0 = {1.0, 1.0, 1.0, 1.0}; 
+GdkRGBA colorC1 = {1.0, 1.0, 1.0, 1.0}; 
+GdkRGBA colorC2 = {1.0, 1.0, 1.0, 1.0}; 
+GdkRGBA colorC3 = {1.0, 1.0, 1.0, 1.0}; 
 
 // Prototipos de funciones
 int* generateArray(unsigned int k);
