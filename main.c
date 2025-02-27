@@ -144,7 +144,7 @@ static gboolean drawRays(GtkWidget *widget, cairo_t *cr) {
     }
 
     free(D); // Liberar memoria del array generado
-    changed = false;
+    Changed = false;
     return FALSE;
 }
 
