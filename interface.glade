@@ -38,16 +38,6 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="N_Entry">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-              </object>
-              <packing>
-                <property name="left-attach">1</property>
-                <property name="top-attach">0</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkLabel" id="K_label">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
@@ -61,16 +51,6 @@
               </object>
               <packing>
                 <property name="left-attach">0</property>
-                <property name="top-attach">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry" id="K_Entry">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-              </object>
-              <packing>
-                <property name="left-attach">1</property>
                 <property name="top-attach">1</property>
               </packing>
             </child>
@@ -212,6 +192,26 @@
                 <property name="top-attach">6</property>
               </packing>
             </child>
+            <child>
+              <object class="GtkSpinButton" id="N_Entry">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="K_Entry">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="resize">False</property>
@@ -222,6 +222,7 @@
           <object class="GtkDrawingArea" id="drawing_area">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <signal name="draw" handler="drawRays" swapped="no"/>
           </object>
           <packing>
             <property name="resize">True</property>
