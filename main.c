@@ -5,6 +5,8 @@
 #include <math.h>
 #include <stdbool.h>  // Para usar el tipo de dato 'bool'
 
+bool Changed = false;
+
 // Variables globales para N y k
 unsigned int N = 4; // Número de rayos
 unsigned int k = 4; // Número de datos
@@ -103,6 +105,9 @@ void drawRay(cairo_t *cr, double x0, double y0, double angle, double length, Gdk
 
 // Función de dibujo principal
 static gboolean drawRays(GtkWidget *widget, cairo_t *cr) {
+
+    if (!Changed) return;
+
     int width = gtk_widget_get_allocated_width(widget);
     int height = gtk_widget_get_allocated_height(widget);
 
@@ -139,11 +144,13 @@ static gboolean drawRays(GtkWidget *widget, cairo_t *cr) {
     }
 
     free(D); // Liberar memoria del array generado
+    changed = false;
     return FALSE;
 }
 
 // Función para redibujar
 static void onShuffleAndDraw(GtkButton* GenerateButton, gpointer userData) {
+    Changed = true;
     GtkWidget *drawingArea = GTK_WIDGET(g_object_get_data(G_OBJECT(GenerateButton), "drawing-area"));
     gtk_widget_queue_draw(drawingArea);    
 }
