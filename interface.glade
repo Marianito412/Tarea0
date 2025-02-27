@@ -196,6 +196,7 @@
               <object class="GtkSpinButton" id="N_Entry">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
+                <signal name="value-changed" handler="onSpinButtonChanged" swapped="no"/>
               </object>
               <packing>
                 <property name="left-attach">1</property>
@@ -206,6 +207,7 @@
               <object class="GtkSpinButton" id="K_Entry">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
+                <signal name="value-changed" handler="onSpinButtonChanged" swapped="no"/>
               </object>
               <packing>
                 <property name="left-attach">1</property>
