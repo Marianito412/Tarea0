@@ -144,7 +144,8 @@ static gboolean drawRays(GtkWidget *widget, cairo_t *cr) {
 }
 
 // Función para redibujar
-static void onShuffleAndDraw(GtkWidget *drawingArea) {
+static void onShuffleAndDraw(GtkButton* GenerateButton, gpointer userData) {
+    GtkWidget *drawingArea = GTK_WIDGET(g_object_get_data(G_OBJECT(GenerateButton), "drawing-area"));
     gtk_widget_queue_draw(drawingArea);    
 }
 
@@ -241,8 +242,9 @@ int main(int argc, char *argv[]) {
 
     // Botón de redibujar
     GtkWidget *button = GTK_WIDGET(gtk_builder_get_object(builder, "Generate_button"));
-    //gtk_box_pack_start(GTK_BOX(box), button, FALSE, FALSE, 0);
-    g_signal_connect(button, "clicked", G_CALLBACK(onShuffleAndDraw), drawingArea);
+    
+    g_object_set_data(G_OBJECT(button), "drawing-area", drawingArea);
+    g_signal_connect(button, "clicked", G_CALLBACK(onShuffleAndDraw), NULL);
 
     gtk_widget_show_all(window);
     gtk_main();
