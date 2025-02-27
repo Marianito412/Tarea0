@@ -200,8 +200,8 @@ int main(int argc, char *argv[]) {
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinButtonN), N);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinButtonK), k);
 
-    gtk_spin_button_set_range(spinButtonN, 4, 10000000000);
-    gtk_spin_button_set_range(spinButtonK, 4, 10000000000);
+    gtk_spin_button_set_range(GTK_SPIN_BUTTON(spinButtonN), 4, 10000000000);
+    gtk_spin_button_set_range(GTK_SPIN_BUTTON(spinButtonK), 4, 10000000000);
 
     //gtk_box_pack_start(GTK_BOX(box), gtk_label_new("N (Número de rayos):"), FALSE, FALSE, 0);
     //gtk_box_pack_start(GTK_BOX(box), spinButtonN, FALSE, FALSE, 0);
