@@ -163,8 +163,8 @@ static void onSpinButtonChanged(GtkSpinButton *spinButton, gpointer userData) {
     *value = newValue;
 
     // Redibujar los rayos
-    GtkWidget *drawingArea = GTK_WIDGET(g_object_get_data(G_OBJECT(spinButton), "drawing-area"));
-    gtk_widget_queue_draw(drawingArea);
+    //GtkWidget *drawingArea = GTK_WIDGET(g_object_get_data(G_OBJECT(spinButton), "drawing-area"));
+    //gtk_widget_queue_draw(drawingArea);
 }
 
 int main(int argc, char *argv[]) {
@@ -197,11 +197,11 @@ int main(int argc, char *argv[]) {
     GtkWidget *spinButtonN = GTK_WIDGET(gtk_builder_get_object(builder, "N_Entry"));
     GtkWidget *spinButtonK = GTK_WIDGET(gtk_builder_get_object(builder, "K_Entry"));
 
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinButtonN), N);
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinButtonK), k);
-
     gtk_spin_button_set_range(GTK_SPIN_BUTTON(spinButtonN), 4, 10000000000);
     gtk_spin_button_set_range(GTK_SPIN_BUTTON(spinButtonK), 4, 10000000000);
+
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinButtonN), N);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinButtonK), k);
 
     //gtk_box_pack_start(GTK_BOX(box), gtk_label_new("N (Número de rayos):"), FALSE, FALSE, 0);
     //gtk_box_pack_start(GTK_BOX(box), spinButtonN, FALSE, FALSE, 0);
@@ -241,7 +241,7 @@ int main(int argc, char *argv[]) {
 
     // Botón de redibujar
     GtkWidget *button = GTK_WIDGET(gtk_builder_get_object(builder, "Generate_button"));
-    gtk_box_pack_start(GTK_BOX(box), button, FALSE, FALSE, 0);
+    //gtk_box_pack_start(GTK_BOX(box), button, FALSE, FALSE, 0);
     g_signal_connect(button, "clicked", G_CALLBACK(onShuffleAndDraw), drawingArea);
 
     gtk_widget_show_all(window);
