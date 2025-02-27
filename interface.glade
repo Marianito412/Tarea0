@@ -181,11 +181,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="Clear_button">
-                <property name="label" translatable="yes">Clear</property>
+              <object class="GtkButton" id="Exit_button">
+                <property name="label" translatable="yes">Exit</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
+                <signal name="clicked" handler="destroy" swapped="no"/>
               </object>
               <packing>
                 <property name="left-attach">1</property>
@@ -224,6 +225,8 @@
           <object class="GtkDrawingArea" id="drawing_area">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
             <signal name="draw" handler="drawRays" swapped="no"/>
           </object>
           <packing>
