@@ -172,6 +172,7 @@ static void onSpinButtonChanged(GtkSpinButton *spinButton, gpointer userData) {
     //gtk_widget_queue_draw(drawingArea);
 }
 
+/*
 void on_color_button_set(GtkColorButton* widget, gpointer user_data) {
     GdkRGBA color;
     gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(widget), &color);
@@ -191,7 +192,7 @@ void on_color_button_set(GtkColorButton* widget, gpointer user_data) {
     g_print("%s seleccionó el color: RGBA(%f, %f, %f, %f)\n",
             button_name, color.red, color.green, color.blue, color.alpha);
 }
-
+*/
 
 int main(int argc, char *argv[]) {
     srand(time(NULL));  // Inicializar la semilla del generador de números aleatorios
@@ -260,15 +261,15 @@ int main(int argc, char *argv[]) {
     gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(colorButtonC3), &colorC3);
 
     // Conectar botones de color
-    g_signal_connect(colorButtonC0, "color-set", G_CALLBACK(on_color_button_set), "Button 1");
-    g_signal_connect(colorButtonC1, "color-set", G_CALLBACK(on_color_button_set), "Button 2");
-    g_signal_connect(colorButtonC2, "color-set", G_CALLBACK(on_color_button_set), "Button 3");
-    g_signal_connect(colorButtonC3, "color-set", G_CALLBACK(on_color_button_set), "Button 4");
+    //g_signal_connect(colorButtonC0, "color-set", G_CALLBACK(on_color_button_set), "Button 1");
+    //g_signal_connect(colorButtonC1, "color-set", G_CALLBACK(on_color_button_set), "Button 2");
+    //g_signal_connect(colorButtonC2, "color-set", G_CALLBACK(on_color_button_set), "Button 3");
+    //g_signal_connect(colorButtonC3, "color-set", G_CALLBACK(on_color_button_set), "Button 4");
 
-    //g_signal_connect(colorButtonC0, "color-set", G_CALLBACK(gtk_color_chooser_get_rgba), &colorC0);
-    //g_signal_connect(colorButtonC1, "color-set", G_CALLBACK(gtk_color_chooser_get_rgba), &colorC1);
-    //g_signal_connect(colorButtonC2, "color-set", G_CALLBACK(gtk_color_chooser_get_rgba), &colorC2);
-    //g_signal_connect(colorButtonC3, "color-set", G_CALLBACK(gtk_color_chooser_get_rgba), &colorC3);
+    g_signal_connect(colorButtonC0, "color-set", G_CALLBACK(gtk_color_chooser_get_rgba), &colorC0);
+    g_signal_connect(colorButtonC1, "color-set", G_CALLBACK(gtk_color_chooser_get_rgba), &colorC1);
+    g_signal_connect(colorButtonC2, "color-set", G_CALLBACK(gtk_color_chooser_get_rgba), &colorC2);
+    g_signal_connect(colorButtonC3, "color-set", G_CALLBACK(gtk_color_chooser_get_rgba), &colorC3);
 
     // Botón de redibujar
     GtkWidget *button = GTK_WIDGET(gtk_builder_get_object(builder, "Generate_button"));
