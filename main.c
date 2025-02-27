@@ -200,14 +200,17 @@ int main(int argc, char *argv[]) {
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinButtonN), N);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinButtonK), k);
 
+    gtk_spin_button_set_range(spinButtonN, 4, 10000000000);
+    gtk_spin_button_set_range(spinButtonK, 4, 10000000000);
+
     //gtk_box_pack_start(GTK_BOX(box), gtk_label_new("N (Número de rayos):"), FALSE, FALSE, 0);
     //gtk_box_pack_start(GTK_BOX(box), spinButtonN, FALSE, FALSE, 0);
     //gtk_box_pack_start(GTK_BOX(box), gtk_label_new("k (Número de datos):"), FALSE, FALSE, 0);
     //gtk_box_pack_start(GTK_BOX(box), spinButtonK, FALSE, FALSE, 0);
 
     // Conectar los campos de entrada a la lógica del programa
-    //g_signal_connect(spinButtonN, "value-changed", G_CALLBACK(onSpinButtonChanged), &N);
-    //g_signal_connect(spinButtonK, "value-changed", G_CALLBACK(onSpinButtonChanged), &k);
+    g_signal_connect(spinButtonN, "value-changed", G_CALLBACK(onSpinButtonChanged), &N);
+    g_signal_connect(spinButtonK, "value-changed", G_CALLBACK(onSpinButtonChanged), &k);
 
     // Asociar el área de dibujo a los campos de entrada
     g_object_set_data(G_OBJECT(spinButtonN), "drawing-area", drawingArea);
