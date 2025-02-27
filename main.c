@@ -10,6 +10,7 @@ bool Changed = false;
 // Variables globales para N y k
 unsigned int N = 4; // Número de rayos
 unsigned int k = 4; // Número de datos
+int* D;
 
 // Variables globales para los colores
 GdkRGBA colorC0 = {1.0, 1.0, 1.0, 1.0}; 
@@ -125,7 +126,7 @@ static gboolean drawRays(GtkWidget *widget, cairo_t *cr) {
 
     // Vector D
     if (Changed){
-        int* D = generateArray(k); // Inicializar vector
+        D = generateArray(k); // Inicializar vector
         shuffleArray(D, k); // Barajar vector
     }
 
